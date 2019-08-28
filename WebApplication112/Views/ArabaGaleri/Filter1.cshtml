@@ -1,0 +1,26 @@
+﻿@model IEnumerable<WebApplication112.Entities.ArabaGaleri>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Filter1</title>
+</head>
+<body>
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem; float:left;width: 300px; height:300px;border: 1px solid groove;padding:initial ;margin: 2px;white-space: nowrap;text-overflow: ellipsis;overflow:scroll;height:auto;">
+                <img style="max-width: 300px; height: 200px; white-space: nowrap;text-overflow: ellipsis;word-wrap: break-word;"; src="~/images/@item.Resim" class="card-img-top">
+                <div class="card-body">
+                    <h5 style="white-space: nowrap;text-overflow: ellipsis;word-wrap: break-word;" class="card-title">Arabanın Modeli : @item.Model</h5>
+                    <p style="white-space: nowrap;text-overflow: ellipsis;word-wrap: break-word;"  class="card-title">Açıklama : @item.Aciklama</p>
+                    <p style="white-space: nowrap;text-overflow: ellipsis;word-wrap: break-word;" class="card-title">Fiyat : @item.Fiyat</p>
+                </div>
+            </div>
+       
+
+    }
+  
+</body>
+</html>

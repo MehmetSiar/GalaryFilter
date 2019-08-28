@@ -1,0 +1,74 @@
+﻿@model IEnumerable<WebApplication112.Entities.ArabaGaleri>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />  
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>*@
+</head>
+<body>
+
+    <br />
+    <br />
+    <br />
+    <div class="row" style="margin-right: auto; margin-left: auto;">
+        <form asp-controller="ArabaGaleri" asp-action="Filter1">
+            <label for="exampleInputEmail1">Araba Modeli</label>
+            <input class="form-control" id="modelaraba" name="Model"
+                   type="text" />
+            <br />
+            <label for="exampleInputEmail1">Açıklama</label>
+            <input class="form-control" id="arabakontrol" name="kontrol"
+                   type="text" />
+            <br />
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary " id="button1" value="Filtrele" />
+            </div>
+        </form>
+        <br />
+        
+        <button style="float:left ;margin-left:7px; height:100px; width:150px; margin-top:30px"; class="btn-success">@Html.ActionLink("Kayıt Oluştur", "Create", "ArabaGaleri")</button>
+       
+
+    </div>
+  
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem; float:left;width: 300px; height:300px;border: 1px solid groove;padding:initial ;margin: 2px;white-space: nowrap;text-overflow: ellipsis;overflow:scroll;height:auto;">
+            <img style="max-width: 300px;height: 200px;" src="~/images/@item.Resim" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">@item.Model</h5>
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">detaylar</a>
+            </div>
+        </div>
+
+    }
+
+    <script>
+        $(function () {
+            var model = $("#modelaraba").val();
+            var kontrol = $("#arabakontrol").val();
+            $("#button1").click(function () {
+                $.ajax({
+                    method: "POST",
+                    url: "/ArabaGaleri/Filter1",
+                    data: { model: model, kontrol: kontrol },
+                }).fail(function () {
+                    alert("başarısız")
+                });
+            });
+
+        });
+
+    </script>
+</body>
+
+</html>
